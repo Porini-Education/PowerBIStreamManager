@@ -5,7 +5,7 @@ VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PowerBIStreamManager.WPF", "PowerBIStreamManager.WPF\PowerBIStreamManager.WPF.csproj", "{CCC6CC14-351C-4AA0-B695-C4AAA29848E1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PowerBIStreamManager", "PowerBIStreamManager\PowerBIStreamManager.csproj", "{1364D269-3958-4606-8953-6D256F6B6930}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PowerBIStreamManager.Core", "PowerBIStreamManager\PowerBIStreamManager.Core.csproj", "{1364D269-3958-4606-8953-6D256F6B6930}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

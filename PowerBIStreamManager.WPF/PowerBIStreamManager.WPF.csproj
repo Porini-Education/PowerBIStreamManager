@@ -34,7 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PowerBIStreamManager\PowerBIStreamManager.csproj" />
+    <ProjectReference Include="..\PowerBIStreamManager\PowerBIStreamManager.Core.csproj" />
   </ItemGroup>
 
 </Project>
