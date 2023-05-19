@@ -1,0 +1,23 @@
+﻿<Page x:Class="PowerBIStreamManager.WPF.Views.StreamConfigurationView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:vm="clr-namespace:PowerBIStreamManager.WPF.ViewModels" 
+      d:DataContext="{d:DesignInstance Type=vm:StreamConfigurationViewModel}"
+      mc:Ignorable="d" 
+      d:DesignHeight="100" d:DesignWidth="400"
+      Title="StreamConfigurationView"
+      Margin="10">
+
+    <StackPanel>
+        <Label Content="API Url" />
+        <TextBox Text="{Binding Uri, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+            <Button Content="Start" Command="{Binding StartStreamingCommand}" Margin="5" Padding="10,0" IsEnabled="{Binding CanStartStreaming}"/>
+            <Button Content="Stop" Command="{Binding StopStreamingCommand}" Margin=" 5" Padding="10,0" IsEnabled="{Binding IsStreaming}"/>
+        </StackPanel>
+        
+    </StackPanel>
+</Page>
