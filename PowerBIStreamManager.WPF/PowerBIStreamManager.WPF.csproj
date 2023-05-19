@@ -15,6 +15,10 @@
 	  <Title>Power BI Stream Manager</Title>
 	  <AssemblyName>PowerBIStreamManager</AssemblyName>
 	  <RootNamespace>PowerBIStreamManager.WPF</RootNamespace>
+	  <SelfContained>false</SelfContained>
+	  <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+	  <PublishSingleFile>true</PublishSingleFile>
+	  <PublishReadyToRun>true</PublishReadyToRun>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
