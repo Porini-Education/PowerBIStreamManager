@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-namespace PowerBIStreamManager.WPF;
+﻿namespace PowerBIStreamManager.WPF;
 /// <summary>
 /// Interaction logic for MainWindow.xaml
 /// </summary>

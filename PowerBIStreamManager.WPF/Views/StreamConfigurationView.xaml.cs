@@ -1,7 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System.Windows.Controls;
-
-namespace PowerBIStreamManager.WPF.Views;
+﻿namespace PowerBIStreamManager.WPF.Views;
 /// <summary>
 /// Interaction logic for StreamConfigurationView.xaml
 /// </summary>

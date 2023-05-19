@@ -1,8 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using System.Windows;
-
-namespace PowerBIStreamManager.WPF;
+﻿namespace PowerBIStreamManager.WPF;
 /// <summary>
 /// Interaction logic for App.xaml
 /// </summary>
