@@ -2,7 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:PowerBIStreamManager.WPF"
-             StartupUri="local:MainWindow">
+             StartupUri="MainWindow.xaml">
     <Application.Resources>
          
     </Application.Resources>
