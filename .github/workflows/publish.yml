@@ -28,7 +28,7 @@ jobs:
     #  run: dotnet build --no-restore -R
       
     - name: Publish
-      run: dotnet publish --no-restore -c Release -r win-x64 -p:PublishTrimmed=true
+      run: dotnet publish PowerBIStreamManager.WPF/PowerBIStreamManager.WPF.csproj --no-restore -c Release -r win-x64
       
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
