@@ -2,33 +2,24 @@
 using System.Text.Json.Serialization;
 
 namespace PowerBIStreamManager;
-internal sealed class ComputerData
-{
-    [JsonPropertyName("computerName")]
-    public string ComputerName { get; }
-    [JsonPropertyName("cpuPercentage")]
-    public float CpuPercentage { get; }
-    [JsonPropertyName("memoryAvailable")]
-    public float MemoryAvailable { get; }
-    [JsonPropertyName("memoryCommitted")]
-    public float MemoryCommitted { get; }
-    [JsonPropertyName("systemReadBytes")]
-    public float SystemReadBytes { get; }
-    [JsonPropertyName("timestamp")]
-    public DateTimeOffset Timestamp { get; }
 
-    public ComputerData(
-      string pcName,
-      PerformanceCounter cpu,
-      PerformanceCounter ram,
-      PerformanceCounter com,
-      PerformanceCounter disk)
+public sealed record ComputerData(string ComputerName, float CpuPercentage, float MemoryAvailable, float MemoryCommitted, float SystemReadBytes)
+{
+    public DateTimeOffset Timestamp { get; set; }
+
+    internal static ComputerData Create(
+        string computerName,
+        PerformanceCounter cpuPercentage,
+        PerformanceCounter memoryAvailable,
+        PerformanceCounter memoryCommitted,
+        PerformanceCounter systemReadBytes)
     {
-        ComputerName = pcName;
-        CpuPercentage = cpu.NextValue();
-        MemoryAvailable = ram.NextValue();
-        MemoryCommitted = com.NextValue();
-        SystemReadBytes = disk.NextValue();
-        Timestamp = DateTimeOffset.Now;
+        return new ComputerData(computerName, cpuPercentage.NextValue(), memoryAvailable.NextValue(), memoryCommitted.NextValue(), systemReadBytes.NextValue()) { Timestamp = DateTimeOffset.Now };
     }
+}
+
+[JsonSourceGenerationOptions(WriteIndented = true, PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase)]
+[JsonSerializable(typeof(ComputerData[]))]
+public partial class ComputerDataContext : JsonSerializerContext
+{
 }

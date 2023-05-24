@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System.Collections.ObjectModel;
+using System.Text.Json;
 using System.Windows;
 
 namespace PowerBIStreamManager.WPF.ViewModels;
@@ -23,7 +25,7 @@ public partial class StreamConfigurationViewModel : ObservableObject
         try
         {
             IsStreaming = true;
-            await Streamer.Start(Uri!).ConfigureAwait(false);
+            await Streamer.Start(Uri!, OnGetContent).ConfigureAwait(false);
         }
         catch (Exception ex)
         {
@@ -39,6 +41,15 @@ public partial class StreamConfigurationViewModel : ObservableObject
         }
     }
 
+    private void OnGetContent(string content)
+    {
+        App.Current.Dispatcher.Invoke((Delegate)(() =>
+        {
+            var data = JsonSerializer.Deserialize(content, ComputerDataContext.Default.ComputerDataArray)![0];
+            SentContent.Add(data);
+        }));
+    }
+
     [RelayCommand]
     private Task StopStreaming() => Streamer.Stop();
 
@@ -50,4 +61,8 @@ public partial class StreamConfigurationViewModel : ObservableObject
     private bool _isStreaming;
 
     public bool CanStartStreaming => !string.IsNullOrEmpty(Uri) && !IsStreaming;
+
+    public string ExampleContent => Streamer.GetContent();
+
+    public ObservableCollection<ComputerData> SentContent { get; } = new();
 }

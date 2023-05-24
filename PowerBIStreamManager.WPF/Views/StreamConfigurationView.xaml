@@ -3,21 +3,34 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:vm="clr-namespace:PowerBIStreamManager.WPF.ViewModels" 
+      xmlns:vm="clr-namespace:PowerBIStreamManager.WPF.ViewModels"
       d:DataContext="{d:DesignInstance Type=vm:StreamConfigurationViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="100" d:DesignWidth="400"
       Title="StreamConfigurationView"
-      Margin="10">
+      Margin="20,10">
 
     <StackPanel>
         <Label Content="API Url" />
-        <TextBox Text="{Binding Uri, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Text="{Binding Uri, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5">
             <Button Content="Start" Command="{Binding StartStreamingCommand}" Margin="5" Padding="10,0" IsEnabled="{Binding CanStartStreaming}"/>
             <Button Content="Stop" Command="{Binding StopStreamingCommand}" Margin=" 5" Padding="10,0" IsEnabled="{Binding IsStreaming}"/>
         </StackPanel>
-        
+
+        <Expander Header="Example Message" Margin="0,5">
+            <TextBox Background="Transparent"
+                     BorderThickness="0"
+                     Text="{Binding ExampleContent, Mode=OneWay}"
+                     IsReadOnly="True"
+                     TextWrapping="Wrap" 
+                     Margin="10,0" />
+        </Expander>
+        <Expander Header="Data Sent" Margin="0,5">
+            <DataGrid ItemsSource="{Binding SentContent}" CanUserResizeRows="False" CanUserSortColumns="False" IsReadOnly="True" 
+                      MaxHeight="200" VerticalScrollBarVisibility="Auto"/>
+        </Expander>
+
     </StackPanel>
 </Page>

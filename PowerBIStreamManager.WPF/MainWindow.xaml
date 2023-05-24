@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:PowerBIStreamManager.WPF.Views"
         mc:Ignorable="d"
-        Title="Power BI Stream Manager" Height="200" Width="500">
+        Title="Power BI Stream Manager" 
+        Width="750" Height="Auto" SizeToContent="Height" >
+        <!--Width="730" Height="210" >-->
     
     <views:StreamConfigurationView />
 </Window>

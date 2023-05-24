@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization.Metadata;
 
 namespace PowerBIStreamManager;
 public class DataStreamer : IStreamerService
@@ -21,7 +21,7 @@ public class DataStreamer : IStreamerService
         cancellationTokenSource = new();
     }
 
-    public async Task Start(string requestUri)
+    public async Task Start(string requestUri, Action<string>? onGetContent = null)
     {
         var cancellationToken = cancellationTokenSource.Token;
         using HttpClient httpClient = new();
@@ -31,8 +31,8 @@ public class DataStreamer : IStreamerService
             while (!cancellationToken.IsCancellationRequested)
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                ComputerData computerData = new(Environment.MachineName, cpu, ram, com, disk);
-                string content = JsonSerializer.Serialize(new[] { computerData });
+                var content = GetContentArray();
+                onGetContent?.Invoke(content);
                 var result = await httpClient.PostAsync(requestUri, new StringContent(content, Encoding.UTF8, "application/json"), cancellationToken).ConfigureAwait(false);
                 result.EnsureSuccessStatusCode();
                 await Task.Delay(1000, cancellationToken).ConfigureAwait(false);
@@ -42,6 +42,21 @@ public class DataStreamer : IStreamerService
         {
             return;
         }
+    }
+
+    public string GetContent()
+    {
+        return JsonSerializer.Serialize(GetData(), ComputerDataContext.Default.ComputerData);
+    }
+
+    private string GetContentArray()
+    {
+        return JsonSerializer.Serialize(new[] { GetData() }, ComputerDataContext.Default.ComputerDataArray);
+    }
+    
+    private ComputerData GetData()
+    {
+        return ComputerData.Create(Environment.MachineName, cpu, ram, com, disk);
     }
 
     public Task Stop()
