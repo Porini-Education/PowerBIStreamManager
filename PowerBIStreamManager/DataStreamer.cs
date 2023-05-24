@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 
@@ -31,7 +32,7 @@ public class DataStreamer : IStreamerService
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 ComputerData computerData = new(Environment.MachineName, cpu, ram, com, disk);
-                string content = JsonSerializer.Serialize(computerData);
+                string content = JsonSerializer.Serialize(new[] { computerData });
                 var result = await httpClient.PostAsync(requestUri, new StringContent(content, Encoding.UTF8, "application/json"), cancellationToken).ConfigureAwait(false);
                 result.EnsureSuccessStatusCode();
                 await Task.Delay(1000, cancellationToken).ConfigureAwait(false);
