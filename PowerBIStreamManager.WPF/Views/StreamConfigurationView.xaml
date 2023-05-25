@@ -4,9 +4,9 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:vm="clr-namespace:PowerBIStreamManager.WPF.ViewModels"
-      d:DataContext="{d:DesignInstance Type=vm:StreamConfigurationViewModel}"
       mc:Ignorable="d" 
-      d:DesignHeight="100" d:DesignWidth="400"
+      d:DataContext="{d:DesignInstance Type=vm:StreamConfigurationViewModel}"
+      d:DesignHeight="300" d:DesignWidth="400"
       Title="StreamConfigurationView"
       Margin="20,10">
 
@@ -28,8 +28,11 @@
                      Margin="10,0" />
         </Expander>
         <Expander Header="Data Sent" Margin="0,5">
-            <DataGrid ItemsSource="{Binding SentContent}" CanUserResizeRows="False" CanUserSortColumns="False" IsReadOnly="True" 
-                      MaxHeight="200" VerticalScrollBarVisibility="Auto"/>
+            <StackPanel>
+                <Button Content="Reset" Command="{Binding ResetSentContentCommand}" Margin="5" Padding="10,0" IsEnabled="{Binding SentContent.Count}" HorizontalAlignment="Right" />
+                <DataGrid ItemsSource="{Binding SentContent}" CanUserResizeRows="False" CanUserSortColumns="False" IsReadOnly="True" 
+                      MaxHeight="200" VerticalScrollBarVisibility="Auto" AutoGeneratingColumn="OnAutoGeneratingColumn" />
+            </StackPanel>
         </Expander>
 
     </StackPanel>

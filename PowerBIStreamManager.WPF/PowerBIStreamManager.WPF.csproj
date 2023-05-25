@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	  <AssemblyVersion>1.0.1</AssemblyVersion>
+	  <AssemblyVersion>1.0.2</AssemblyVersion>
 	  <OutputType>WinExe</OutputType>
 	  <TargetFramework>net7.0-windows</TargetFramework>
 	  <LangVersion>latest</LangVersion>
@@ -13,12 +13,18 @@
 	  <Description>Stream PC performance to an API</Description>
 	  <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
 	  <Title>Power BI Stream Manager</Title>
+	  
 	  <AssemblyName>PowerBIStreamManager</AssemblyName>
 	  <RootNamespace>PowerBIStreamManager.WPF</RootNamespace>
 	  <SelfContained>false</SelfContained>
 	  <RuntimeIdentifier>win-x64</RuntimeIdentifier>
 	  <PublishSingleFile>true</PublishSingleFile>
 	  <PublishReadyToRun>true</PublishReadyToRun>
+	  <SignAssembly>False</SignAssembly>
+	  <RepositoryUrl>https://github.com/PoriniEdu/PowerBIStreamManager</RepositoryUrl>
+	  <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+	  <PackageReadmeFile>README.md</PackageReadmeFile>
+	  <Copyright>Copyright (c) 2023 Willliam Russell</Copyright>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -28,6 +34,17 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DebugType>portable</DebugType>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
