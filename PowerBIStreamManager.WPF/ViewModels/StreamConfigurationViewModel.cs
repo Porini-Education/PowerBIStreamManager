@@ -43,11 +43,15 @@ public partial class StreamConfigurationViewModel : ObservableObject
 
     private void OnGetContent(string content)
     {
-        App.Current.Dispatcher.Invoke((Delegate)(() =>
+        var data = JsonSerializer.Deserialize(content, ComputerDataContext.Default.ComputerDataArray)![0];
+        App.Current.Dispatcher.Invoke(() =>
         {
-            var data = JsonSerializer.Deserialize(content, ComputerDataContext.Default.ComputerDataArray)![0];
-            SentContent.Add(data);
-        }));
+            if (SentContent.Count >= 100)
+            {
+                SentContent.RemoveAt(SentContent.Count - 1);
+            }
+            SentContent.Insert(0,data);
+        });
     }
 
     [RelayCommand]
@@ -65,4 +69,7 @@ public partial class StreamConfigurationViewModel : ObservableObject
     public string ExampleContent => Streamer.GetContent();
 
     public ObservableCollection<ComputerData> SentContent { get; } = new();
+
+    [RelayCommand]
+    private void ResetSentContent() => SentContent.Clear();
 }
